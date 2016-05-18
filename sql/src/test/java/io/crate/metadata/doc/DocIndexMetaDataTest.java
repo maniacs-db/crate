@@ -881,7 +881,7 @@ public class DocIndexMetaDataTest extends CrateUnitTest {
                         functions),
                 new FulltextAnalyzerResolver(clusterService, mock(IndicesAnalysisService.class)),
                 mock(AnalysisMetaData.class),
-                mock(NumberOfShards.class)
+                new NumberOfShards(clusterService)
         );
 
         Analysis analysis = new Analysis(new ParameterContext(new Object[0], new Object[0][], null));

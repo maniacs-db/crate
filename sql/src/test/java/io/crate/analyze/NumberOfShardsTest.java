@@ -31,6 +31,7 @@ import org.elasticsearch.cluster.ClusterState;
 import org.elasticsearch.cluster.node.DiscoveryNode;
 import org.elasticsearch.cluster.node.DiscoveryNodes;
 import org.elasticsearch.common.collect.ImmutableOpenMap;
+import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Rule;
 import org.junit.Test;
@@ -54,9 +55,13 @@ public class NumberOfShardsTest extends CrateUnitTest {
     public ExpectedException expectedException = ExpectedException.none();
 
     @BeforeClass
-    public static void setup() {
+    public static void beforeClass() {
         when(clusterService.state()).thenReturn(clusterState);
         when(clusterState.nodes()).thenReturn(discoveryNodes);
+    }
+
+    @Before
+    public void before() {
         when(discoveryNodes.dataNodes()).thenReturn(createDataNodes(3));
         numberOfShards = new NumberOfShards(clusterService);
     }
